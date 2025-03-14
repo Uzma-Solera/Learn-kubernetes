@@ -1,7 +1,7 @@
 apiVersion: v1
-kind: Job
+kind: pod
 metadata:
-  name: hello
+  name: nginx
 spec:
   containers:
     - name: nginx
