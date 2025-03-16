@@ -1,19 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-rolling-update
+  name: rolling-update
+  labels:
+    app: nginx
+    env: dev
 spec:
   replicas: 3
   strategy:
-    type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-        - name: nginx
-          image: nginx:1.24
+  selector:
+    matchLabels:
+      app: nginx
+    template:
+      metadata:
+        labels:
+          app: nginx
+      spec:
+        containers:
+          - name: nginx
+            image: nginx:1.24
+
